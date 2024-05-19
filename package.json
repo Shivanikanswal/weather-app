@@ -1,9 +1,25 @@
 {
   "devDependencies": {
-    "parcel": "^2.12.0"
+    "parcel": "^2.12.0",
+    "postcss": "^8.4.38",
+    "process": "^0.11.10",
+    "tailwindcss": "^3.4.3"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.1",
+    "font-awesome-icons": "^1.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
-  }
+  },
+  "name": "weather-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "jest"
+  },
+  "author": "Shivani Kanswal",
+  "license": "ISC",
+  "description": ""
 }
