@@ -1,13 +1,17 @@
-import logo from "../utils/images/logo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun } from "@fortawesome/free-solid-svg-icons";
 const Header = () => {
   return (
-    <div className="flex justify-between h-16 p-6 backdrop-blur-sm bg-[#3b79d080]">
+    <div className="flex justify-between h-16 p-6 backdrop-blur-sm bg-[#05459c80]">
       <div className="flex items-center">
-        <img src={logo} className=" w-20 h-20"></img>
-        <p>UrWeather</p>
+        <FontAwesomeIcon icon={faSun} className=" h-11 w-10 text-[#ee7b0d]" />
+        <p className=" ml-2 font-semibold text-xl">WeatherApp</p>
       </div>
-      <div>Menu</div>
+      <div>
+        <button>Login/Sign-Up</button>
+      </div>
     </div>
   );
+  // bg-[#94b7e780]
 };
 export default Header;
