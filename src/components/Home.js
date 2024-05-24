@@ -22,6 +22,7 @@ const Home = () => {
         cityName +
         "&count=10&language=en&format=json"
     );
+
     const jsonData = await data.json();
     setWeatherData(jsonData.results);
   };
