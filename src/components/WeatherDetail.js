@@ -10,14 +10,6 @@ const WeatherDetail = (props) => {
     if (name) fetchWeatherData();
   }, []);
 
-  var oldTime = weatherDetail?.dt;
-
-  const event = new Date(oldTime * 1000);
-  const newDate = event.toDateString();
-  const newTime = event.toLocaleTimeString("en-US");
-
-  console.log(event.toDateString());
-
   const fetchWeatherData = async () => {
     const data = await fetch(
       "https://api.openweathermap.org/data/2.5/weather?lat=" +
@@ -25,32 +17,55 @@ const WeatherDetail = (props) => {
         "&lon=" +
         longitude +
         "&exclude={minutely}&appid=bd1323b2ca2752073120f0c501fe8b72&units=metric"
-      // "https://api.open-meteo.com/v1/forecast?latitude=" +
-      // latitude +
-      // "&longitude=" +
-      // longitude +
-      // "&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,cloud_cover,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,rain,cloud_cover,uv_index,is_day&daily=temperature_2m_max,temperature_2m_min"
     );
-    // https://api.openweathermap.org/data/2.5/weather?lat=30.32295&lon=78.03168&appid=bd1323b2ca2752073120f0c501fe8b72
 
     const jsonData = await data.json();
-
-    console.log(jsonData);
     setWeatherDetail(jsonData);
     console.log(weatherDetail);
   };
+
+  const temp = weatherDetail?.main?.temp;
+  const feels_like = weatherDetail?.main?.feels_like;
+  const weatherDescription = weatherDetail?.weather?.[0]?.description;
+  const iconCode = weatherDetail?.weather?.[0]?.icon;
+  // const { temp, feels_like } = weatherDetail?.main;
+  var oldTime = weatherDetail?.dt;
+  const event = new Date(oldTime * 1000);
+  const newDate = event.toDateString();
+  const newTime = event.toLocaleTimeString("en-US");
 
   return (
     <div>
       <div className="flex m-5">
         <div className="current w-[30%] h-64 rounded-2xl mr-6 bg-[#05459c80] text-white backdrop-blur-sm">
-          <div>
-            <div className="temp">
-              <img src=""></img>
-              <div>{weatherDetail?.main?.temp}</div>
+          <div className="inner-div px-3 mx-3">
+            <div className="temp border-b border-white">
+              <img
+                src={
+                  "https://openweathermap.org/img/wn/" + iconCode + "@2x.png"
+                }
+              ></img>
+              <div className="inner-temp flex">
+                <div>
+                  <span className=" text-5xl">{Math.trunc(temp)}°</span>
+                  <span className=" text-2xl mb-4">C</span>
+                </div>
+                <span>Feels like {feels_like}° C</span>
+              </div>
+              <div className=" flex">
+                <img
+                  src={
+                    "https://openweathermap.org/img/wn/" + iconCode + "@2x.png"
+                  }
+                  className=" w-8 h-8"
+                ></img>
+                <span>{weatherDescription}</span>
+              </div>
             </div>
             <div>
-              <p className="location">{name}</p>
+              <p className="location">
+                {weatherDetail?.name}, {weatherDetail?.sys?.country}
+              </p>
               <p className="datentime">
                 {newTime}, {newDate}
               </p>
@@ -59,9 +74,6 @@ const WeatherDetail = (props) => {
         </div>
         <div className="others w-[70%] h-64 rounded-2xl ml-6 bg-[#05459c80] text-white backdrop-blur-sm"></div>
       </div>
-      {/* <h1>{name}</h1> */}
-      {/* <h1>Time {weatherDetail?.current?.time}</h1> */}
-      {/* <h1>Temperature {weatherDetail?.current?.temperature_2m}</h1> */}
     </div>
   );
 };
