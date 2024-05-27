@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import weatherImg from "../utils/images/all-weather.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCalendar,
+  faLocation,
+  faLocationPin,
+} from "@fortawesome/free-solid-svg-icons";
+// import { faSun } from "@fortawesome/free-solid-svg-icons";
 
 const WeatherDetail = (props) => {
   const [weatherDetail, setWeatherDetail] = useState([]);
@@ -36,23 +44,23 @@ const WeatherDetail = (props) => {
 
   return (
     <div>
-      <div className="flex m-5">
-        <div className="current w-[30%] h-64 rounded-2xl mr-6 bg-[#05459c80] text-white backdrop-blur-sm">
-          <div className="inner-div px-3 mx-3">
-            <div className="temp border-b border-white">
+      <div className="flex m-5 p-5">
+        <div className="current w-[25%] h-auto rounded-2xl mr-6 bg-[#05459c80] text-white backdrop-blur-sm">
+          <div className="inner-div px-5">
+            <div className="temp border-b border-white mt-3">
               <img
                 src={
                   "https://openweathermap.org/img/wn/" + iconCode + "@2x.png"
                 }
               ></img>
-              <div className="inner-temp flex">
-                <div>
-                  <span className=" text-5xl">{Math.trunc(temp)}°</span>
-                  <span className=" text-2xl mb-4">C</span>
+              <div className="inner-temp flex items-center mb-3">
+                <div className="temp-main flex items-center pr-4">
+                  <span className=" text-6xl">{Math.trunc(temp)}°</span>
+                  <span className=" text-2xl mb-2">C</span>
                 </div>
-                <span>Feels like {feels_like}° C</span>
+                <span>(Feels like {feels_like}°)</span>
               </div>
-              <div className=" flex">
+              <div className=" flex mb-3">
                 <img
                   src={
                     "https://openweathermap.org/img/wn/" + iconCode + "@2x.png"
@@ -62,17 +70,27 @@ const WeatherDetail = (props) => {
                 <span>{weatherDescription}</span>
               </div>
             </div>
-            <div>
-              <p className="location">
-                {weatherDetail?.name}, {weatherDetail?.sys?.country}
-              </p>
-              <p className="datentime">
-                {newTime}, {newDate}
-              </p>
+            <div className="ext my-3">
+              <div className=" loc flex mb-3">
+                <p className=" pr-2">
+                  <FontAwesomeIcon icon={faLocationPin} />
+                </p>
+                <p className="location">
+                  {weatherDetail?.name}, {weatherDetail?.sys?.country}
+                </p>
+              </div>
+              <div className="cal flex mb-3">
+                <p className=" pr-2">
+                  <FontAwesomeIcon icon={faCalendar} />
+                </p>
+                <p className="datentime">
+                  {newTime}, {newDate}
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        <div className="others w-[70%] h-64 rounded-2xl ml-6 bg-[#05459c80] text-white backdrop-blur-sm"></div>
+        <div className="others w-[75%] h-auto rounded-2xl ml-6 bg-[#05459c80] text-white backdrop-blur-sm"></div>
       </div>
     </div>
   );
